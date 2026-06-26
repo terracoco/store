@@ -133,6 +133,33 @@
   }
   #toast.show{transform:translateX(-50%) translateY(0)}
 
+  /* ---- responsive ---- */
+  @media(max-width:640px){
+    .site .wrap{gap:.55rem;padding:.55rem 0}
+    .brand{min-width:0;flex:1 1 auto}
+    .brand img{width:34px}
+    .brand .name{font-size:1.25rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .nav{flex:none;gap:.7rem}
+    .nav a.link{display:none}            /* hide in-page link on mobile; hero has "View Catalogue" */
+    .btn{padding:.58rem .9rem;font-size:.82rem}
+    .hero{padding:2.6rem 0 2rem}
+    .hero .emblem{width:min(220px,56vw)}
+    .hero p.lede{font-size:1rem;margin-bottom:1.4rem}
+    .hero .cta{gap:.6rem}
+    .hero .cta .btn{flex:1 1 12rem}
+    .values{gap:.45rem 1.4rem;padding:1.2rem 0}
+    .cat{padding:2.2rem 0 3rem}
+    .cat-head{margin-bottom:1.4rem}
+    .card h3{font-size:1.06rem;min-height:0}
+    .card .body{padding:.85rem .85rem 1rem}
+  }
+  @media(max-width:400px){
+    .brand .name{font-size:1.1rem}
+    .nav .btn-wa{padding:.55rem .75rem}
+    .actions{grid-template-columns:1fr}
+    footer .wrap{justify-content:center;text-align:center}
+  }
+
   @media (prefers-reduced-motion:reduce){
     *{transition:none!important;animation:none!important;scroll-behavior:auto}
   }
