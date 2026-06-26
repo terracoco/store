@@ -135,6 +135,7 @@
   .price{display:flex;align-items:baseline;gap:.55rem;margin-top:auto}
   .price .now{font-family:"Outfit",sans-serif;font-weight:600;font-size:1.12rem;color:var(--bark)}
   .price .was{font-size:.9rem;color:var(--bark-soft);text-decoration:line-through}
+  .price .usd{font-size:.82rem;font-weight:500;color:var(--palm);margin-left:auto;white-space:nowrap}
   .actions{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-top:.4rem}
   .actions .btn{padding:.6rem .5rem;font-size:.8rem}
 
@@ -361,10 +362,14 @@
     {name:"Thenga Coconut Shell Ladles/Spoon Set | Eco-Friendly Handmade Wooden Kitchen Utensils - Set of 3", now:439, was:599, off:27, img:"https://www.thengacoco.com/cdn/shop/files/ladle2.jpg?v=1782373536"}
   ];
 
+  const MARKUP   = 1.25;          // true 20% margin (cost ÷ 0.8) on listed selling price & MRP
+  const USD_RATE = 86;            // INR per 1 USD — update if the rate moves
+  const mk  = n => Math.round(n * MARKUP);                                 // marked-up INR amount
   const inr = n => "₹" + n.toLocaleString("en-IN");
+  const usd = n => "$" + Math.round(n / USD_RATE).toLocaleString("en-US"); // USD for an INR amount
   const slug = s => s.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"").slice(0,60);
   const waLink = p => `https://wa.me/${WA}?text=` + encodeURIComponent(
-    `Hi TerraCoco, I'm interested in the ${p.name} (${inr(p.now)}). Please share details, availability and pricing.`);
+    `Hi TerraCoco, I'm interested in the ${p.name} (${inr(mk(p.now))} / ~${usd(mk(p.now))}). Please share details, availability and pricing.`);
 
   const grid = document.getElementById("grid");
   products.forEach((p,i)=>{
@@ -377,7 +382,7 @@
       </div>
       <div class="body">
         <h3>${p.name}</h3>
-        <div class="price"><span class="now">${inr(p.now)}</span>${p.was?`<span class="was">${inr(p.was)}</span>`:""}</div>
+        <div class="price"><span class="now">${inr(mk(p.now))}</span>${p.was?`<span class="was">${inr(mk(p.was))}</span>`:""}<span class="usd">~${usd(mk(p.now))}</span></div>
         <div class="actions">
           <button class="btn btn-ghost" data-dl="${i}">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
